@@ -1,0 +1,67 @@
+{
+  "Version": 1,
+  "UUID": "8e18f995-92b5-11e8-9f2e-685b35836414",
+  "Name": "Yollo",
+  "Properties": {
+    "description": "Trello now on Holochain",
+    "language": "en"
+  },
+  "PropertiesSchemaFile": "properties_schema.json",
+  "BasedOn": "",
+  "RequiresVersion": 26,
+  "DHTConfig": {
+    "HashType": "sha2-256"
+  },
+  "Progenitor": {
+    "Identity": "",
+    "PubKey": null
+  },
+  "Zomes": [{
+    "Name": "boards",
+    "Description": "Zome for the board details",
+    "CodeFile": "boards.js",
+    "RibosomeType": "js",
+    "BridgeFuncs": null,
+    "Config": {
+      "ErrorHandling": "throwErrors"
+    },
+    "Entries": [{
+        "Name": "lane",
+        "DataFormat": "json",
+        "Sharing": "public"
+      },
+      {
+        "Name": "card",
+        "DataFormat": "json",
+        "Sharing": "public"
+      },
+      {
+        "Name": "card_link",
+        "DataFormat": "links"
+      },
+      {
+        "Name": "lable",
+        "DataFormat": "string",
+        "Sharing": "public"
+      },
+      {
+        "Name": "lable_link",
+        "DataFormat": "links"
+      },
+      {
+        "Name": "comment",
+        "DataFormat": "string",
+        "Sharing": "public"
+      },
+      {
+        "Name": "comment_link",
+        "DataFormat": "links"
+      }
+    ],
+    "Functions": [{
+      "Name": "newCard",
+      "CallingType": "json",
+      "Exposure": "public"
+    }]
+  }]
+}
