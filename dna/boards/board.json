@@ -1,5 +1,5 @@
 {
-	"title": "Lane Schema",
+	"title": "Board Schema",
 	"type": "object",
 	"properties": {
 		"uuid": {
@@ -12,5 +12,5 @@
 			"type": "string"
 		}
 	},
-    "required": ["uuid"]
+    "required": []
 }

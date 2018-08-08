@@ -1,0 +1,31 @@
+{
+  "Tests": [{
+      "Convey": "Create New Lanes",
+      "Zome": "boards",
+      "FnName": "newLane",
+      "Input": {
+        "title": "Lane_1",
+        "lable": ""
+      },
+      "Output": "%h1%"
+    },
+    {
+      "Convey": "get the lanes name Lanes",
+      "Zome": "boards",
+      "FnName": "getLanes",
+      "Input": "",
+      "Output": "[object Object]"
+    },
+    {
+      "Convey": "Create New Card",
+      "Zome": "boards",
+      "FnName": "newCard",
+      "Input": {
+        "title": "Card_1",
+        "description": "Description of the First card",
+        "lane_hash":"%r1%"
+      },
+      "Output": "%h1%"
+    }
+  ]
+}

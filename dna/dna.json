@@ -26,9 +26,22 @@
       "ErrorHandling": "throwErrors"
     },
     "Entries": [{
+        "Name": "board",
+        "DataFormat": "json",
+        "Sharing": "public"
+      },
+      {
+        "Name": "board_link",
+        "DataFormat": "links"
+      },
+      {
         "Name": "lane",
         "DataFormat": "json",
         "Sharing": "public"
+      },
+      {
+        "Name": "lane_link",
+        "DataFormat": "links"
       },
       {
         "Name": "card",
@@ -59,9 +72,20 @@
       }
     ],
     "Functions": [{
-      "Name": "newCard",
-      "CallingType": "json",
-      "Exposure": "public"
-    }]
+        "Name": "newLane",
+        "CallingType": "json",
+        "Exposure": "public"
+      },
+      {
+        "Name": "getLanes",
+        "CallingType": "string",
+        "Exposure": "public"
+      },
+      {
+        "Name": "newCard",
+        "CallingType": "json",
+        "Exposure": "public"
+      }
+    ]
   }]
 }
