@@ -1,4 +1,4 @@
-# Yollo
+# Errand
 Distrebuted Built on Trello on Holochain
 
 ## Demo:
