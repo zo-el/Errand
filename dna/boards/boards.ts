@@ -22,7 +22,7 @@ function newLane({ title, lable }): Hash {
   return hash;
 }
 
-function getLanes({ }): GetLinksResponse[] {
+function getLanes(): GetLinksResponse[] {
   //TEMP :  add to pregenerated Board
   const BOARD_HASH = makeHash("board", { title: "First_Board", label: "" });
 
@@ -34,10 +34,17 @@ function getLanes({ }): GetLinksResponse[] {
   debug(`All the lanes: ` + JSON.stringify(lanes));
   return lanes;
 }
+function getLaneHash(lane_id: string):Hash {
+  const lanes:GetLinksResponse[]=getLanes();
+  let filtered = lanes.filter((lane)=>{
+    return lane.Entry.id==lane_id;
+  });
+  return filtered[0].Hash;
+}
 
-function newCard({ title, description, lane_hash }) {
-  debug(lane_hash)
-  const uuid = uuidGenerator();
+function newCard({ uuid, title, description, lane_id }) {
+  const lane_hash = getLaneHash(lane_id);
+  // const uuid = uuidGenerator();
   const card = { title, description, uuid };
   const hash = commit("card", card);
   commit("card_link", { Links: [{ Base: lane_hash, Link: hash, Tag: "lane_tag" }] });

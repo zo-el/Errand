@@ -1,8 +1,11 @@
 import React, {Component} from 'react'
+
 import './App.css'
 import {Board} from 'react-trello'
+import {fetchJSON} from '../common'
 
-const data = require('./data.json')
+
+const data = require('../data.json')
 
 const handleDragStart = (cardId, laneId) => {
     console.log('drag started')
@@ -37,23 +40,23 @@ class App extends Component {
     }
 
     onDataChange = nextData => {
-        console.log('New card has been added')
+        console.log('onDataChange(New card has been added)')
         console.log(nextData)
     };
 
   	onCardAdd = (card, laneId) => {
-  		console.log(`ADDING: New card added to lane ${laneId}`)
+  		console.log(`onCardAdd( New card added to lane ${laneId})`)
   		console.dir(card)
   	};
 
     onCardDelete = (cardId, metadata, laneId)=>{
       //TODO delete callback to HC
-      console.log("DELETE: ",cardId, metadata ,  laneId);
+      console.log("onCardDelete: ",cardId, metadata ,  laneId);
     };
 
     onCardClick = (cardId, metadata, laneId)=>{
       //TODO Expand the Card to see better and edit
-      console.log("CLICK: ",cardId, metadata ,  laneId);
+      console.log("onCardClick: ",cardId, metadata ,  laneId);
     };
 
     // completeCard = () => {
@@ -72,6 +75,12 @@ class App extends Component {
     //         card: {id: 'Ec2Error', title: 'EC2 Instance Down', label: '30 mins', description: 'Main EC2 instance down'}
     //     })
     // };
+
+    // componentWillMount(){
+    //   // fetchJSON('/fn/boards/getBoard').then(() =>{
+    //   //
+    //   // });
+    // }
 
     render() {
         return (
