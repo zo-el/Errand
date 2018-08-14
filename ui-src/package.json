@@ -5,6 +5,7 @@
   "proxy": "http://localhost:4141",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "hc-redux-middleware": "^1.0.3",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.7",
