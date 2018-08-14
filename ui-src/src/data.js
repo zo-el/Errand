@@ -109,37 +109,37 @@ const data = {
           "description": "Completed 10km on cycle"
         }
       ]
-    }//,
-    // {
-    //   "id": "ARCHIVED2",
-    //   "title": "Archived2",
-    //   "style": {"width": 280},
-    //   "label": "1/1",
-    //   "cards": [
-    //     {
-    //       "id": "Archived1",
-    //       "title": "Go Trekking",
-    //       "label": "300 mins",
-    //       "cardStyle": { "width": 270, "maxWidth": 270, "margin": "auto", "marginBottom": 5 },
-    //       "description": "Completed 10km on cycle"
-    //     }
-    //   ]
-    // },
-    // {
-    //   "id": "ARCHIVED3",
-    //   "title": "Archived3",
-    //   "style": {"width": 280},
-    //   "label": "1/1",
-    //   "cards": [
-    //     {
-    //       "id": "Archived1",
-    //       "title": "Go Trekking",
-    //       "label": "300 mins",
-    //       "cardStyle": { "width": 270, "maxWidth": 270, "margin": "auto", "marginBottom": 5 },
-    //       "description": "Completed 10km on cycle"
-    //     }
-    //   ]
-    // }
+    },
+    {
+      "id": "ARCHIVED2",
+      "title": "Archived2",
+      "style": {"width": 280},
+      "label": "1/1",
+      "cards": [
+        {
+          "id": "Archived1",
+          "title": "Go Trekking",
+          "label": "300 mins",
+          "cardStyle": { "width": 270, "maxWidth": 270, "margin": "auto", "marginBottom": 5 },
+          "description": "Completed 10km on cycle"
+        }
+      ]
+    },
+    {
+      "id": "ARCHIVED3",
+      "title": "Archived3",
+      "style": {"width": 280},
+      "label": "1/1",
+      "cards": [
+        {
+          "id": "Archived1",
+          "title": "Go Trekking",
+          "label": "300 mins",
+          "cardStyle": { "width": 270, "maxWidth": 270, "margin": "auto", "marginBottom": 5 },
+          "description": "Completed 10km on cycle"
+        }
+      ]
+    }
   ]
 }
 

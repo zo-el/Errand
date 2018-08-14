@@ -30,18 +30,18 @@ class App extends Component {
 
 componentDidMount() {
     getBoardState();
-    const laneData = [this.props];
-
+    const laneData = this.props;
     this.setState({
-      boardData: { lanes: [laneData] },
+      boardData:  laneData  ,
     })
-    const cards = this.state.lanes.cards
-    // console.log("PROPS", this.props)
+    //const cards = this.state.lanes.cards
+     console.log("PROPS", this.props)
   }
 
     setEventBus = eventBus => {
       console.log("setEventBus")
         this.setState({eventBus})
+        console.log(this.state)
     }
 
     onDataChange = nextData => {
