@@ -85,6 +85,16 @@
         "Name": "newCard",
         "CallingType": "json",
         "Exposure": "public"
+      },
+      {
+        "Name": "getCards",
+        "CallingType": "json",
+        "Exposure": "public"
+      },
+      {
+        "Name": "getBoardState",
+        "CallingType": "json",
+        "Exposure": "public"
       }
     ]
   }]

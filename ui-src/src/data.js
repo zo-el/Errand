@@ -1,4 +1,4 @@
-{
+const data = {
   "lanes": [
     {
       "id": "TASK",
@@ -142,3 +142,5 @@
     }
   ]
 }
+
+export default data;

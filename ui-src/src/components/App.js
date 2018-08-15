@@ -1,11 +1,9 @@
 import React, {Component} from 'react'
-
 import './App.css'
 import {Board} from 'react-trello'
-import {fetchJSON} from '../common'
-
-
-const data = require('../data.json')
+import { getBoardState, addCard, moveCard, deleteCard } from '../actions'
+import { connect } from 'react-redux'
+import { bindActionCreators } from "redux";
 
 const handleDragStart = (cardId, laneId) => {
     console.log('drag started')
@@ -21,22 +19,28 @@ const handleDragEnd = (cardId, sourceLaneId, targetLaneId) => {
 }
 
 class App extends Component {
-    state = {"boardData": {"lanes": []}};
+  constructor (props) {
+    super(props);
+    this.state = {
+      boardData: { lanes: [] },
+      eventBus: ""
+    };
+  }
+
+componentDidMount() {
+    getBoardState();
+    const laneData = this.props;
+    this.setState({
+      boardData:  laneData  ,
+    })
+    //const cards = this.state.lanes.cards
+     console.log("PROPS", this.props)
+  }
 
     setEventBus = eventBus => {
       console.log("setEventBus")
         this.setState({eventBus})
-    }
-
-    async componentWillMount() {
-        const response = await this.getBoard()
-        this.setState({boardData: response})
-    }
-
-    getBoard = () => {
-        return new Promise(resolve => {
-            resolve(data)
-        })
+        console.log(this.state)
     }
 
     onDataChange = nextData => {
@@ -44,19 +48,20 @@ class App extends Component {
         console.log(nextData)
     };
 
-  	onCardAdd = (card, laneId) => {
-  		console.log(`onCardAdd( New card added to lane ${laneId})`)
-  		console.dir(card)
+  	onCardAdd = (cards, laneId) => {
+  		console.log(`onCardAdd( New card added to lane ${ laneId })`)
+  		console.dir( cards )
+      addCard( cards );
   	};
 
     onCardDelete = (cardId, metadata, laneId)=>{
       //TODO delete callback to HC
-      console.log("onCardDelete: ",cardId, metadata ,  laneId);
+      console.log("onCardDelete: ", cardId, metadata , laneId);
     };
 
     onCardClick = (cardId, metadata, laneId)=>{
       //TODO Expand the Card to see better and edit
-      console.log("onCardClick: ",cardId, metadata ,  laneId);
+      console.log("onCardClick: ",cardId, metadata , laneId);
     };
 
     // completeCard = () => {
@@ -88,10 +93,8 @@ class App extends Component {
                 <div className="App-header">
                 <img src="errand.png" height="42" width="42" />
                     <h1>Errand</h1>
-
                 </div>
                 <div className="App-intro">
-
                     <Board
                       data={this.state.boardData}
                       eventBusHandle={this.setEventBus}
@@ -112,5 +115,14 @@ class App extends Component {
         )
     }
 }
+const mapStateToProps = state => {
+  return {
+    ...state
+  }
+}
 
-export default App
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ getBoardState, addCard, moveCard, deleteCard }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
