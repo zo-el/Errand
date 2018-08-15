@@ -55,14 +55,16 @@ function newCard({ id, title, description, lane_id }) {
 function getBoardState() {
   // const BOARD_HASH = makeHash("board", { title: "First_Board", label: "" });
   const lanes: GetLinksResponse[] = getLanes();
-  let data: any = { lanes: {} }
+  let data: any = {board:{ lanes: [] }}
+  let i=0;
   lanes.forEach((lane) => {
-    data.lanes = {
+    data.board.lanes[i] = {
       id: lane.Entry.uuid,
       title: lane.Entry.title,
       lable: lane.Entry.lable,
       cards: getCards(lane.Hash)
     }
+    i++;
   });
 
   debug("Board State:" + JSON.stringify(data))
@@ -103,8 +105,23 @@ function uuidGenerator() {
 // -----------------------------------------------------------------
 
 function genesis() {
-  newBoard({ title: "First_Board", label: "" })
+  testGenesisFunction();
   return true;
+}
+
+function testGenesisFunction(){
+  newBoard({ title: "First_Board", label: "" })
+
+  newLane({id:"LANE_ID_1",title:"Lane_TITLE_1",lable:"Lane_Lable_1"});
+  newCard({"id":"Card_ID_11","title": "Card_Title_11","description": "Description of the First card 11","lane_id": "LANE_ID_1"})
+  newCard({"id":"Card_ID_12","title": "Card_Title_12","description": "Description of the First card 12","lane_id": "LANE_ID_1"})
+  newCard({"id":"Card_ID_13","title": "Card_Title_13","description": "Description of the First card 13","lane_id": "LANE_ID_1"})
+
+  newLane({id:"LANE_ID_2",title:"Lane_TITLE_2",lable:"Lane_Lable_2"});
+  newCard({"id":"Card_ID_21","title": "Card_Title_21","description": "Description of the First card 21","lane_id": "LANE_ID_2"})
+  newCard({"id":"Card_ID_22","title": "Card_Title_22","description": "Description of the First card 22","lane_id": "LANE_ID_2"})
+  newCard({"id":"Card_ID_23","title": "Card_Title_23","description": "Description of the First card 23","lane_id": "LANE_ID_2"})
+
 }
 
 // -----------------------------------------------------------------

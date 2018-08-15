@@ -27,15 +27,24 @@ class App extends Component {
     };
   }
 
-componentDidMount() {
-    getBoardState();
-    const laneData = this.props;
-    this.setState({
-      boardData:  laneData  ,
-    })
-    //const cards = this.state.lanes.cards
-     console.log("PROPS", this.props)
+  initApp = () => {
+    setInterval(
+      () => {
+        this.props.getBoardState();
+        const laneData = this.props.state;
+        this.setState({
+          boardData:  laneData  ,
+        })
+        //console.log("PROPS", this.props)
+
+      },
+      500
+    );
   }
+
+componentDidMount() {
+    this.initApp()
+    }
 
     setEventBus = eventBus => {
       console.log("setEventBus")
@@ -117,12 +126,18 @@ componentDidMount() {
 }
 const mapStateToProps = state => {
   return {
-    ...state
+    state
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ getBoardState, addCard, moveCard, deleteCard }, dispatch);
 }
+
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     getBoardState: () => dispatch(getBoardState()),
+//   }
+// }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
