@@ -53,7 +53,7 @@ function newCard({ id, title, description, lane_id }) {
   return card_link_hash;
 }
 
-function updateCardLane({cardId,sourceLaneId,targetLaneId}){
+function moveCard({cardId,sourceLaneId,targetLaneId}){
   debug("Updating Card "+cardId);
   // TODO : GET card Hash
   const old_lane_hash=getLaneHash(sourceLaneId);
@@ -140,7 +140,7 @@ function uuidGenerator() {
 
 function genesis() {
   newBoard({ title: "First_Board", label: "" })
-  //testGenesisFunction();
+  testGenesisFunction();
   return true;
 }
 

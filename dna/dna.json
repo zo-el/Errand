@@ -92,7 +92,7 @@
         "Exposure": "public"
       },
       {
-        "Name": "updateCardLane",
+        "Name": "moveCard",
         "CallingType": "json",
         "Exposure": "public"
       },

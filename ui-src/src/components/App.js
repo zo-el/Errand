@@ -11,12 +11,6 @@ const handleDragStart = (cardId, laneId) => {
     console.log(`laneId: ${laneId}`)
 }
 
-const handleDragEnd = (cardId, sourceLaneId, targetLaneId) => {
-    console.log('drag ended')
-    console.log(`cardId: ${cardId}`)
-    console.log(`sourceLaneId: ${sourceLaneId}`)
-    console.log(`targetLaneId: ${targetLaneId}`)
-}
 
 class App extends Component {
   constructor (props) {
@@ -72,6 +66,13 @@ class App extends Component {
       //TODO Expand the Card to see better and edit
       console.log("onCardClick: ",cardId, metadata , laneId);
     };
+    handleDragEnd = (cardId, sourceLaneId, targetLaneId) => {
+        console.log('drag ended')
+        console.log(`cardId: ${cardId}`)
+        console.log(`sourceLaneId: ${sourceLaneId}`)
+        console.log(`targetLaneId: ${targetLaneId}`)
+        this.props.moveCard(cardId, sourceLaneId, targetLaneId);
+    }
 
     // completeCard = () => {
     //     this.state.eventBus.publish({
@@ -113,7 +114,7 @@ class App extends Component {
                       collapsibleLanes={true}
                       editable={true}
                       // handleDragStart={this.handleDragStart}
-                      handleDragEnd={handleDragEnd}
+                      handleDragEnd={this.handleDragEnd}
                       onCardClick={this.onCardClick}
                       onCardAdd={this.onCardAdd}
                       onCardDelete={this.onCardDelete}

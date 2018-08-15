@@ -56,7 +56,7 @@
     {
       "Convey": "Updating Card Lane",
       "Zome": "boards",
-      "FnName": "updateCardLane",
+      "FnName": "moveCard",
       "Input": {"cardId":"Card_ID","sourceLaneId":"LANE_ID_2","targetLaneId":"LANE_ID_1"},
       "Regexp":".*"
     },

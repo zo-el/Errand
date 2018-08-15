@@ -50,7 +50,7 @@ function newCard(_a) {
     var card_link_hash = commit("card_link", { Links: [{ Base: lane_hash, Link: hash, Tag: "card_tag" }] });
     return card_link_hash;
 }
-function updateCardLane(_a) {
+function moveCard(_a) {
     var cardId = _a.cardId, sourceLaneId = _a.sourceLaneId, targetLaneId = _a.targetLaneId;
     debug("Updating Card " + cardId);
     // TODO : GET card Hash
@@ -129,7 +129,7 @@ function uuidGenerator() {
 // -----------------------------------------------------------------
 function genesis() {
     newBoard({ title: "First_Board", label: "" });
-    //testGenesisFunction();
+    testGenesisFunction();
     return true;
 }
 function testGenesisFunction() {

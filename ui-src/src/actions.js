@@ -2,12 +2,13 @@
 /*=============================================
 =            Action Exports
 =============================================*/
+export const namespace = "boards";
+
 export const GET_BOARD_STATE = "getBoardState";
 export const ADD_CARD = "newCard";
 export const ADD_LANE = "newLane";
 export const MOVE_CARD = "moveCard";
 export const DELETE_CARD = "deleteCard";
-export const namespace = "boards";
 
 /*=============================================
 =            Action Definitions
@@ -44,13 +45,13 @@ export function addCard(card_info, lane_id) {
 }
 
 //card should change lanes id
-export function moveCard(lane) {
+export function moveCard(cardId, sourceLaneId, targetLaneId) {
   return {
     type: MOVE_CARD,
     meta: {
       isHc: true,
       namespace: namespace,
-      data: lane,
+      data: {cardId, sourceLaneId, targetLaneId},
     }
   }
 }
