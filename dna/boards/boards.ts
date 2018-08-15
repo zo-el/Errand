@@ -29,7 +29,7 @@ function getLanes(): GetLinksResponse[] {
   // let lane_entry = lanes.map((lane) => {
   //   return lane.Entry;
   // });
-  debug(`getLanes: ` + JSON.stringify(lanes));
+  // debug(`getLanes: ` + JSON.stringify(lanes));
   return lanes;
 }
 
@@ -38,11 +38,12 @@ function getLaneHash(lane_id: string): Hash {
   let filtered = lanes.filter((lane) => {
     return lane.Entry.uuid == lane_id;
   });
-  debug("getLaneHash" + filtered[0].Hash)
+  // debug("getLaneHash" + filtered[0].Hash)
   return filtered[0].Hash;
 }
 
 function newCard({ id, title, description, lane_id }) {
+  debug("Adding New Card"+id)
   const uuid: string = id;
   const lane_hash = getLaneHash(lane_id);
   // const uuid = uuidGenerator();
@@ -67,7 +68,7 @@ function getBoardState() {
     i++;
   });
 
-  debug("Board State:" + JSON.stringify(data))
+  // debug("Board State:" + JSON.stringify(data))
   return data;
 }
 

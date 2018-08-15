@@ -42,8 +42,8 @@ class App extends Component {
     );
   }
 
-componentDidMount() {
-    this.initApp()
+  componentDidMount() {
+    this.initApp();
     }
 
     setEventBus = eventBus => {
@@ -60,7 +60,7 @@ componentDidMount() {
   	onCardAdd = (cards, laneId) => {
   		console.log(`onCardAdd( New card added to lane ${ laneId })`)
   		console.dir( cards )
-      addCard( cards );
+      this.props.addCard( cards,laneId );
   	};
 
     onCardDelete = (cardId, metadata, laneId)=>{

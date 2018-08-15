@@ -25,18 +25,23 @@ export function getBoardState() {
 }
 
 /*======== Card State Management =========*/
-export function addCard (card_info, then) {
-  console.log("card_info inside actions", card_info);
+export function addCard(card_info, lane_id) {
+  console.log("card_info inside actions", card_info, lane_id);
+  const data={
+    id: card_info.id,
+    title: card_info.title,
+    description: card_info.description,
+    lane_id: lane_id
+  };
   return {
-      type: ADD_CARD,
-      meta: {
-        isHc: true,
-        namespace: namespace,
-        data: card_info,
-        then
-      }
+    type: ADD_CARD,
+    meta: {
+      isHc: true,
+      namespace: namespace,
+      data: data
     }
   }
+}
 
 //card should change lanes id
 export function moveCard(lane) {

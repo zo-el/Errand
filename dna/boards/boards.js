@@ -28,7 +28,7 @@ function getLanes() {
     // let lane_entry = lanes.map((lane) => {
     //   return lane.Entry;
     // });
-    debug("getLanes: " + JSON.stringify(lanes));
+    // debug(`getLanes: ` + JSON.stringify(lanes));
     return lanes;
 }
 function getLaneHash(lane_id) {
@@ -36,11 +36,12 @@ function getLaneHash(lane_id) {
     var filtered = lanes.filter(function (lane) {
         return lane.Entry.uuid == lane_id;
     });
-    debug("getLaneHash" + filtered[0].Hash);
+    // debug("getLaneHash" + filtered[0].Hash)
     return filtered[0].Hash;
 }
 function newCard(_a) {
     var id = _a.id, title = _a.title, description = _a.description, lane_id = _a.lane_id;
+    debug("Adding New Card" + id);
     var uuid = id;
     var lane_hash = getLaneHash(lane_id);
     // const uuid = uuidGenerator();
@@ -63,7 +64,7 @@ function getBoardState() {
         };
         i++;
     });
-    debug("Board State:" + JSON.stringify(data));
+    // debug("Board State:" + JSON.stringify(data))
     return data;
 }
 function getCards(lane_hash) {
