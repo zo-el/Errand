@@ -4,7 +4,6 @@ import {Board} from 'react-trello'
 import { getBoardState, addCard, moveCard, deleteCard } from '../actions'
 import { connect } from 'react-redux'
 import { bindActionCreators } from "redux";
-const data = require('../data.js')
 
 const handleDragStart = (cardId, laneId) => {
     console.log('drag started')

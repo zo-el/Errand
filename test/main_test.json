@@ -4,6 +4,7 @@
       "Zome": "boards",
       "FnName": "newLane",
       "Input": {
+        "id": "LANE_ID",
         "title": "Lane_1",
         "lable": ""
       },
@@ -21,11 +22,27 @@
       "Zome": "boards",
       "FnName": "newCard",
       "Input": {
-        "title": "Card_1",
+        "id":"Card_ID",
+        "title": "Card_Title",
         "description": "Description of the First card",
-        "lane_hash":"%r1%"
+        "lane_id": "LANE_ID"
       },
-      "Output": "%h1%"
+      "Output": "%h%"
+    },
+    {
+      "Convey": "Get cards with the lane hash",
+      "Zome": "boards",
+      "FnName": "getCards",
+      "Input": "%r3%",
+      "Regexp": "[{\"description\":\"Description of the First card\",\"id\":\"Card_ID\",\"title\":\"Card_Title\"}]"
+    },
+    {
+      "Convey": "Get Board State",
+      "Zome": "boards",
+      "FnName": "getBoardState",
+      "Input": "",
+      "Regexp":".*"
+
     }
   ]
 }
