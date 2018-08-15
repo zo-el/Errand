@@ -50,6 +50,53 @@ function newCard(_a) {
     var card_link_hash = commit("card_link", { Links: [{ Base: lane_hash, Link: hash, Tag: "card_tag" }] });
     return card_link_hash;
 }
+function updateCardLane(_a) {
+    var cardId = _a.cardId, sourceLaneId = _a.sourceLaneId, targetLaneId = _a.targetLaneId;
+    debug("Updating Card " + cardId);
+    // TODO : GET card Hash
+    var old_lane_hash = getLaneHash(sourceLaneId);
+    debug("old_lane_hash" + old_lane_hash);
+    var new_lane_hash = getLaneHash(targetLaneId);
+    debug("new_lane_hash" + new_lane_hash);
+    var card_hash = getCardHash({ card_id: cardId, lane_hash: old_lane_hash });
+    // DELETE OLD Link && MAKE new Link
+    debug("card_hash" + card_hash);
+    commit("card_link", { Links: [
+            { Base: old_lane_hash, Link: card_hash, Tag: "card_tag", LinkAction: HC.LinkAction.Del },
+            { Base: new_lane_hash, Link: card_hash, Tag: "card_tag" }
+        ] });
+}
+function getCards(lane_hash) {
+    // debug("LANE_HASH"+lane_hash)
+    var card_list = getLaneCard(lane_hash);
+    var card_data = [];
+    var i = 0;
+    card_list.map(function (card) {
+        card_data[i] = {
+            "id": card.Entry.uuid,
+            "title": card.Entry.title,
+            "description": card.Entry.description,
+            "lable": card.Entry.lable
+        };
+        i++;
+    });
+    // debug("card_data: " + JSON.stringify(card_data));
+    return card_data;
+}
+function getLaneCard(lane_hash) {
+    var card_list = getLinks(lane_hash, "card_tag", { Load: true });
+    return card_list;
+}
+function getCardHash(_a) {
+    var card_id = _a.card_id, lane_hash = _a.lane_hash;
+    var card_list = getLaneCard(lane_hash);
+    debug("CARD:: " + JSON.stringify(card_list));
+    var filtered = card_list.filter(function (card) {
+        return card.Entry.uuid == card_id;
+    });
+    // debug("getCardHash" + filtered[0].Hash)
+    return filtered[0].Hash;
+}
 function getBoardState() {
     // const BOARD_HASH = makeHash("board", { title: "First_Board", label: "" });
     var lanes = getLanes();
@@ -64,24 +111,8 @@ function getBoardState() {
         };
         i++;
     });
-    // debug("Board State:" + JSON.stringify(data))
+    debug("Board State:" + JSON.stringify(data));
     return data;
-}
-function getCards(lane_hash) {
-    var card_list = getLinks(lane_hash, "card_tag", { Load: true });
-    var card_data = [];
-    var i = 0;
-    card_list.map(function (card) {
-        card_data[i] = {
-            "id": card.Entry.uuid,
-            "title": card.Entry.title,
-            "description": card.Entry.description,
-            "lable": card.Entry.lable
-        };
-        i++;
-    });
-    // debug("card_data: " + JSON.stringify(card_data));
-    return card_data;
 }
 //------------------------------
 // Helper Functions
@@ -97,11 +128,11 @@ function uuidGenerator() {
 //  The Genesis Function
 // -----------------------------------------------------------------
 function genesis() {
-    testGenesisFunction();
+    newBoard({ title: "First_Board", label: "" });
+    //testGenesisFunction();
     return true;
 }
 function testGenesisFunction() {
-    newBoard({ title: "First_Board", label: "" });
     newLane({ id: "LANE_ID_1", title: "Lane_TITLE_1", lable: "Lane_Lable_1" });
     newCard({ "id": "Card_ID_11", "title": "Card_Title_11", "description": "Description of the First card 11", "lane_id": "LANE_ID_1" });
     newCard({ "id": "Card_ID_12", "title": "Card_Title_12", "description": "Description of the First card 12", "lane_id": "LANE_ID_1" });
@@ -157,7 +188,16 @@ function validateMod(entryName, entry, header, replaces, pkg, sources) {
             return false;
     }
 }
-function validateDel(entryName, hash, pkg, sources) { return false; }
+function validateDel(entryName, hash, pkg, sources) {
+    switch (entryName) {
+        case "lane_link":
+            return true;
+        case "card_link":
+            return true;
+        default:
+            return false;
+    }
+}
 function validatePutPkg(entryName) { return null; }
 function validateModPkg(entryName) { return null; }
 function validateDelPkg(entryName) { return null; }

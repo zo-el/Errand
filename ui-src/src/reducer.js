@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 import data from './data';
 
 const errandApp = ( state = initialState, action) => {
+  // console.log("ACTIONS:: ",action)
   const {meta, type , payload} = action;
   switch (type) {
     case actions.GET_BOARD_STATE:

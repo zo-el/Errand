@@ -53,27 +53,26 @@ function newCard({ id, title, description, lane_id }) {
   return card_link_hash;
 }
 
-function getBoardState() {
-  // const BOARD_HASH = makeHash("board", { title: "First_Board", label: "" });
-  const lanes: GetLinksResponse[] = getLanes();
-  let data: any = {board:{ lanes: [] }}
-  let i=0;
-  lanes.forEach((lane) => {
-    data.board.lanes[i] = {
-      id: lane.Entry.uuid,
-      title: lane.Entry.title,
-      lable: lane.Entry.lable,
-      cards: getCards(lane.Hash)
-    }
-    i++;
-  });
-
-  // debug("Board State:" + JSON.stringify(data))
-  return data;
+function updateCardLane({cardId,sourceLaneId,targetLaneId}){
+  debug("Updating Card "+cardId);
+  // TODO : GET card Hash
+  const old_lane_hash=getLaneHash(sourceLaneId);
+  debug("old_lane_hash"+old_lane_hash)
+  const new_lane_hash=getLaneHash(targetLaneId);
+  debug("new_lane_hash"+new_lane_hash)
+  const card_hash=getCardHash({card_id:cardId,lane_hash:old_lane_hash});
+  // DELETE OLD Link && MAKE new Link
+  debug("card_hash"+card_hash);
+  commit("card_link",{Links: [
+  {Base: old_lane_hash,Link: card_hash,Tag: "card_tag",LinkAction: HC.LinkAction.Del},
+  {Base: new_lane_hash,Link: card_hash,Tag: "card_tag"}
+  ]});
 }
 
+
 function getCards(lane_hash: Hash) {
-  const card_list = getLinks(lane_hash, "card_tag", { Load: true })
+  // debug("LANE_HASH"+lane_hash)
+  const card_list = getLaneCard(lane_hash);
   const card_data = [];
   let i = 0;
   card_list.map((card) => {
@@ -89,6 +88,40 @@ function getCards(lane_hash: Hash) {
   return card_data;
 }
 
+function getLaneCard( lane_hash:Hash){
+  const card_list = getLinks(lane_hash, "card_tag", { Load: true })
+  return card_list;
+}
+
+function getCardHash({card_id,lane_hash}){
+  const card_list=getLaneCard(lane_hash);
+  debug("CARD:: "+JSON.stringify(card_list))
+  let filtered = card_list.filter((card) => {
+    return card.Entry.uuid == card_id;
+  });
+  // debug("getCardHash" + filtered[0].Hash)
+  return filtered[0].Hash;
+}
+
+
+function getBoardState() {
+  // const BOARD_HASH = makeHash("board", { title: "First_Board", label: "" });
+  const lanes: GetLinksResponse[] = getLanes();
+  let data: any = {board:{ lanes: [] }}
+  let i=0;
+  lanes.forEach((lane) => {
+    data.board.lanes[i] = {
+      id: lane.Entry.uuid,
+      title: lane.Entry.title,
+      lable: lane.Entry.lable,
+      cards: getCards(lane.Hash)
+    }
+    i++;
+  });
+
+   debug("Board State:" + JSON.stringify(data))
+  return data;
+}
 //------------------------------
 // Helper Functions
 //------------------------------
@@ -106,12 +139,12 @@ function uuidGenerator() {
 // -----------------------------------------------------------------
 
 function genesis() {
-  testGenesisFunction();
+  newBoard({ title: "First_Board", label: "" })
+  //testGenesisFunction();
   return true;
 }
 
 function testGenesisFunction(){
-  newBoard({ title: "First_Board", label: "" })
 
   newLane({id:"LANE_ID_1",title:"Lane_TITLE_1",lable:"Lane_Lable_1"});
   newCard({"id":"Card_ID_11","title": "Card_Title_11","description": "Description of the First card 11","lane_id": "LANE_ID_1"})
@@ -177,7 +210,15 @@ function validateMod(entryName: any, entry: any, header: any, replaces: any, pkg
   }
 }
 
-function validateDel(entryName: any, hash: any, pkg: any, sources: any): boolean { return false; }
+function validateDel(entryName: any, hash: any, pkg: any, sources: any): boolean {
+  switch (entryName) {
+    case "lane_link":
+      return true;
+    case "card_link":
+      return true;
+    default:
+      return false;
+  } }
 
 function validatePutPkg(entryName) { return null; }
 

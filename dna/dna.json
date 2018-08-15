@@ -92,6 +92,11 @@
         "Exposure": "public"
       },
       {
+        "Name": "updateCardLane",
+        "CallingType": "json",
+        "Exposure": "public"
+      },
+      {
         "Name": "getBoardState",
         "CallingType": "json",
         "Exposure": "public"
