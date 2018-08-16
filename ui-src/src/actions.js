@@ -6,6 +6,7 @@ const GET_BOARD_STATE = "getBoardState";
 const ADD_CARD = "addCard";
 const MOVE_CARD = "moveCard";
 const DELETE_CARD = "deleteCard";
+const NEW_LANE = "newLane";
 const namespace = "boards";
 
 /*=============================================
@@ -22,6 +23,19 @@ export function getBoardState() {
     }
   }
 }
+
+export function newLane (lane_title, then) {
+  console.log("lane_title inside actions", lane_title);
+  return {
+      type: NEW_LANE,
+      meta: {
+        isHc: true,
+        namespace: namespace,
+        data: lane_title,
+        then
+      }
+    }
+  }
 
 /*======== Card State Management =========*/
 export function addCard (card_info, then) {

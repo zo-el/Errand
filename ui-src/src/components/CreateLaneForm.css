@@ -1,0 +1,80 @@
+* {
+  box-sizing: border-box;
+  font-family: helvetica neue, helvetica, arial, sans-serif;
+}
+
+.create-game-form {
+  color: #e3e4f3;
+  z-index: 99999;
+  border: 2px solid white;
+  width: 300px;
+  height: 200px;
+  background: #6b96ce;
+  margin: 0 auto;
+  margin-right: 50px;
+  align-content: center;
+  align-items: center;
+}
+
+.registration-header {
+  margin-top: 50px;
+}
+
+.create-game-form h6 {
+  background: white;
+}
+
+.reg-hr {
+  width: 80%;
+  margin-top: 30px;
+}
+
+.register-input {
+  text-align: center;
+  margin: 35px 10px 2px 10px;
+  background: #e3e4f3;
+  border-radius: 25px;
+}
+
+/* ============= Register Buttons ========= */
+.modal-button {
+  background: #6b96ce;
+  margin: 0 auto;
+  margin: 10px;
+  padding: 15px;
+  color: white;
+  border-radius: 25px;
+  display: inline-block;
+}
+
+.modal-button span {
+    -webkit-box-shadow:  0px -1px #fff, 0px 1px 1px #FFFFFF;
+    -webkit-background-size: 100%, 100%, 100%, 4px 4px;
+    -webkit-border-radius: 10px;
+    -webkit-transition: -webkit-transform .1s ease-in-out;
+    display: inline-block;
+    padding: 10px 40px 10px 40px;
+    color: #3A474D;
+}
+
+.modal-button span:hover {
+    color: black;
+    text-shadow: 0px -1px #97A63A;
+    cursor: pointer;
+}
+
+
+.button span:after {
+    display: block;
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    right: 14px;
+    top: 12px;
+    font-weight: 700;
+    color: #AEBF3B;
+    text-shadow: 0px 1px #fff, 0px -1px #97A63A;
+    font-size: 26px;
+}
+
+/* =========== =========== =========== =========== ===========*/
