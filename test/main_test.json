@@ -1,6 +1,6 @@
 {
   "Tests": [{
-      "Convey": "Create New Lane1",
+      "Convey": "1. Create New Lane1",
       "Zome": "boards",
       "FnName": "newLane",
       "Input": {
@@ -10,7 +10,7 @@
       },
       "Output": "%h1%"
     },{
-        "Convey": "Create New Lane2",
+        "Convey": "2. Create New Lane2",
         "Zome": "boards",
         "FnName": "newLane",
         "Input": {
@@ -21,14 +21,14 @@
         "Output": "%h1%"
       },
     {
-      "Convey": "get the lanes name Lanes",
+      "Convey": "3. get the lanes name Lanes",
       "Zome": "boards",
       "FnName": "getLanes",
       "Input": "",
       "Output": "[object Object],[object Object]"
     },
     {
-      "Convey": "Create New Card",
+      "Convey": "4. Create New Card",
       "Zome": "boards",
       "FnName": "newCard",
       "Input": {
@@ -40,28 +40,61 @@
       "Output": "%h%"
     },
     {
-      "Convey": "Get cards with the lane hash",
+      "Convey": "5. Get cards with the lane hash",
       "Zome": "boards",
       "FnName": "getCards",
       "Input": "%r3%",
       "Regexp": "[{\"description\":\"Description of the First card\",\"id\":\"Card_ID\",\"title\":\"Card_Title\"}]"
     },
     {
-      "Convey": "Get Board State",
+      "Convey": "6. Get Board State",
       "Zome": "boards",
       "FnName": "getBoardState",
       "Input": "",
       "Regexp":".*"
     },
     {
-      "Convey": "Updating Card Lane",
+      "Convey": "7. Updating Card Lane",
       "Zome": "boards",
       "FnName": "moveCard",
       "Input": {"cardId":"Card_ID","sourceLaneId":"LANE_ID_2","targetLaneId":"LANE_ID_1"},
       "Regexp":".*"
     },
     {
-      "Convey": "Get Board State",
+      "Convey": "8. Get Board State",
+      "Zome": "boards",
+      "FnName": "getBoardState",
+      "Input": "",
+      "Regexp":".*"
+    },
+    {
+      "Convey": "9. Create New Card",
+      "Zome": "boards",
+      "FnName": "newCard",
+      "Input": {
+        "id":"Card_ID_1",
+        "title": "Card_Title_1",
+        "description": "Description of the second card",
+        "lane_id": "LANE_ID_2"
+      },
+      "Output": "%h%"
+    },
+    {
+      "Convey": "10. Get Board State",
+      "Zome": "boards",
+      "FnName": "getBoardState",
+      "Input": "",
+      "Regexp":".*"
+    },
+    {
+      "Convey": "1!. Delete Card",
+      "Zome": "boards",
+      "FnName": "deleteCard",
+      "Input": {"card_id":"Card_ID","lane_id":"LANE_ID_1"},
+      "Regexp":".*"
+    },
+    {
+      "Convey": "12. Get Board State",
       "Zome": "boards",
       "FnName": "getBoardState",
       "Input": "",

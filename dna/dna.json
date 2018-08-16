@@ -97,6 +97,11 @@
         "Exposure": "public"
       },
       {
+        "Name": "deleteCard",
+        "CallingType": "json",
+        "Exposure": "public"
+      },
+      {
         "Name": "getBoardState",
         "CallingType": "json",
         "Exposure": "public"

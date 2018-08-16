@@ -36,9 +36,10 @@ function getLanes(): GetLinksResponse[] {
 function getLaneHash(lane_id: string): Hash {
   const lanes: GetLinksResponse[] = getLanes();
   let filtered = lanes.filter((lane) => {
+    debug(lane.Entry.uuid+" == "+lane_id);
     return lane.Entry.uuid == lane_id;
   });
-  // debug("getLaneHash" + filtered[0].Hash)
+  // debug("getLaneHash" + filtered)
   return filtered[0].Hash;
 }
 
@@ -55,20 +56,27 @@ function newCard({ id, title, description, lane_id }) {
 
 function moveCard({cardId,sourceLaneId,targetLaneId}){
   debug("Updating Card "+cardId);
-  // TODO : GET card Hash
-  const old_lane_hash=getLaneHash(sourceLaneId);
-  debug("old_lane_hash"+old_lane_hash)
   const new_lane_hash=getLaneHash(targetLaneId);
-  debug("new_lane_hash"+new_lane_hash)
-  const card_hash=getCardHash({card_id:cardId,lane_hash:old_lane_hash});
+  const card_hash=deleteCard({card_id:cardId,lane_id:sourceLaneId});
   // DELETE OLD Link && MAKE new Link
-  debug("card_hash"+card_hash);
   commit("card_link",{Links: [
-  {Base: old_lane_hash,Link: card_hash,Tag: "card_tag",LinkAction: HC.LinkAction.Del},
   {Base: new_lane_hash,Link: card_hash,Tag: "card_tag"}
   ]});
 }
 
+function deleteCard({card_id,lane_id}){
+  debug("Deleting Card "+card_id);
+  // : GET card Hash
+  const old_lane_hash=getLaneHash(lane_id);
+  // debug("old_lane_hash"+old_lane_hash)
+  const card_hash=getCardHash({card_id:card_id,lane_hash:old_lane_hash});
+  // DELETE OLD Link && MAKE new Link
+  // debug("card_hash"+card_hash);
+  commit("card_link",{Links: [
+  {Base: old_lane_hash,Link: card_hash,Tag: "card_tag",LinkAction: HC.LinkAction.Del}
+  ]});
+  return card_hash;
+}
 
 function getCards(lane_hash: Hash) {
   // debug("LANE_HASH"+lane_hash)
@@ -84,18 +92,17 @@ function getCards(lane_hash: Hash) {
     }
     i++;
   });
-  // debug("card_data: " + JSON.stringify(card_data));
+   debug("card_data: " + JSON.stringify(card_data));
   return card_data;
 }
 
 function getLaneCard( lane_hash:Hash){
-  const card_list = getLinks(lane_hash, "card_tag", { Load: true })
+  const card_list = getLinks(lane_hash, "card_tag", { Load: true ,StatusMask: HC.Status.Live })
   return card_list;
 }
 
 function getCardHash({card_id,lane_hash}){
   const card_list=getLaneCard(lane_hash);
-  debug("CARD:: "+JSON.stringify(card_list))
   let filtered = card_list.filter((card) => {
     return card.Entry.uuid == card_id;
   });
@@ -140,7 +147,7 @@ function uuidGenerator() {
 
 function genesis() {
   newBoard({ title: "First_Board", label: "" })
-  testGenesisFunction();
+  // testGenesisFunction();
   return true;
 }
 

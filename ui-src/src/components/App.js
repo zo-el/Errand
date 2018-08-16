@@ -13,32 +13,32 @@ const handleDragStart = (cardId, laneId) => {
 
 
 class App extends Component {
-  constructor (props) {
-    super(props);
-    this.state = {
-      boardData: { lanes: [] },
-      eventBus: ""
-    };
-  }
-
-  initApp = () => {
-    setInterval(
-      () => {
-        this.props.getBoardState();
-        const laneData = this.props.state;
-        this.setState({
-          boardData:  laneData  ,
-        })
-        //console.log("PROPS", this.props)
-
-      },
-      500
-    );
-  }
-
-  componentDidMount() {
-    this.initApp();
+    constructor (props) {
+      super(props);
+      this.state = {
+        boardData: { lanes: [] },
+        eventBus: ""
+      };
     }
+
+    initApp = () => {
+      setInterval(
+        () => {
+          this.props.getBoardState();
+          const laneData = this.props.state;
+          this.setState({
+            boardData:  laneData  ,
+          })
+          //console.log("PROPS", this.props)
+
+        },
+        500
+      );
+    }
+
+    componentDidMount() {
+      this.initApp();
+      }
 
     setEventBus = eventBus => {
       console.log("setEventBus")
@@ -57,6 +57,14 @@ class App extends Component {
       this.props.addCard( cards,laneId );
   	};
 
+    handleDragEnd = (cardId, sourceLaneId, targetLaneId) => {
+        console.log('drag ended')
+        console.log(`cardId: ${cardId}`)
+        console.log(`sourceLaneId: ${sourceLaneId}`)
+        console.log(`targetLaneId: ${targetLaneId}`)
+        this.props.moveCard(cardId, sourceLaneId, targetLaneId);
+    }
+
     onCardDelete = (cardId, metadata, laneId)=>{
       //TODO delete callback to HC
       console.log("onCardDelete: ", cardId, metadata , laneId);
@@ -66,13 +74,6 @@ class App extends Component {
       //TODO Expand the Card to see better and edit
       console.log("onCardClick: ",cardId, metadata , laneId);
     };
-    handleDragEnd = (cardId, sourceLaneId, targetLaneId) => {
-        console.log('drag ended')
-        console.log(`cardId: ${cardId}`)
-        console.log(`sourceLaneId: ${sourceLaneId}`)
-        console.log(`targetLaneId: ${targetLaneId}`)
-        this.props.moveCard(cardId, sourceLaneId, targetLaneId);
-    }
 
     // completeCard = () => {
     //     this.state.eventBus.publish({
