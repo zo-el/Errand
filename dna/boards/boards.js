@@ -34,7 +34,6 @@ function getLanes() {
 function getLaneHash(lane_id) {
     var lanes = getLanes();
     var filtered = lanes.filter(function (lane) {
-        debug(lane.Entry.uuid + " == " + lane_id);
         return lane.Entry.uuid == lane_id;
     });
     // debug("getLaneHash" + filtered)
@@ -42,7 +41,7 @@ function getLaneHash(lane_id) {
 }
 function newCard(_a) {
     var id = _a.id, title = _a.title, description = _a.description, lane_id = _a.lane_id;
-    debug("Adding New Card" + id);
+    debug("Adding New Card: " + id);
     var uuid = id;
     var lane_hash = getLaneHash(lane_id);
     // const uuid = uuidGenerator();
@@ -63,7 +62,7 @@ function moveCard(_a) {
 }
 function deleteCard(_a) {
     var card_id = _a.card_id, lane_id = _a.lane_id;
-    debug("Deleting Card " + card_id);
+    debug("Deleting Card: " + card_id);
     // : GET card Hash
     var old_lane_hash = getLaneHash(lane_id);
     // debug("old_lane_hash"+old_lane_hash)
@@ -89,7 +88,7 @@ function getCards(lane_hash) {
         };
         i++;
     });
-    debug("card_data: " + JSON.stringify(card_data));
+    // debug("card_data: " + JSON.stringify(card_data));
     return card_data;
 }
 function getLaneCard(lane_hash) {
@@ -119,7 +118,7 @@ function getBoardState() {
         };
         i++;
     });
-    debug("Board State:" + JSON.stringify(data));
+    // debug("Board State:" + JSON.stringify(data))
     return data;
 }
 //------------------------------
@@ -137,7 +136,7 @@ function uuidGenerator() {
 // -----------------------------------------------------------------
 function genesis() {
     newBoard({ title: "First_Board", label: "" });
-    // testGenesisFunction();
+    testGenesisFunction();
     return true;
 }
 function testGenesisFunction() {

@@ -36,7 +36,6 @@ function getLanes(): GetLinksResponse[] {
 function getLaneHash(lane_id: string): Hash {
   const lanes: GetLinksResponse[] = getLanes();
   let filtered = lanes.filter((lane) => {
-    debug(lane.Entry.uuid+" == "+lane_id);
     return lane.Entry.uuid == lane_id;
   });
   // debug("getLaneHash" + filtered)
@@ -44,7 +43,7 @@ function getLaneHash(lane_id: string): Hash {
 }
 
 function newCard({ id, title, description, lane_id }) {
-  debug("Adding New Card"+id)
+  debug("Adding New Card: "+id)
   const uuid: string = id;
   const lane_hash = getLaneHash(lane_id);
   // const uuid = uuidGenerator();
@@ -65,7 +64,7 @@ function moveCard({cardId,sourceLaneId,targetLaneId}){
 }
 
 function deleteCard({card_id,lane_id}){
-  debug("Deleting Card "+card_id);
+  debug("Deleting Card: "+card_id);
   // : GET card Hash
   const old_lane_hash=getLaneHash(lane_id);
   // debug("old_lane_hash"+old_lane_hash)
@@ -92,7 +91,7 @@ function getCards(lane_hash: Hash) {
     }
     i++;
   });
-   debug("card_data: " + JSON.stringify(card_data));
+  // debug("card_data: " + JSON.stringify(card_data));
   return card_data;
 }
 
@@ -125,8 +124,7 @@ function getBoardState() {
     }
     i++;
   });
-
-   debug("Board State:" + JSON.stringify(data))
+  // debug("Board State:" + JSON.stringify(data))
   return data;
 }
 //------------------------------
@@ -147,7 +145,7 @@ function uuidGenerator() {
 
 function genesis() {
   newBoard({ title: "First_Board", label: "" })
-  // testGenesisFunction();
+  testGenesisFunction();
   return true;
 }
 

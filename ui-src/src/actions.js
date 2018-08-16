@@ -57,13 +57,13 @@ export function moveCard(cardId, sourceLaneId, targetLaneId) {
 }
 
 //
-export function deleteCard(card_id) {
+export function deleteCard(card_id,lane_id) {
   return {
     type: DELETE_CARD,
     meta: {
       isHc: true,
       namespace: namespace,
-      data: card_id,
+      data: {card_id:card_id,lane_id:lane_id},
     }
   }
 }

@@ -65,9 +65,10 @@ class App extends Component {
         this.props.moveCard(cardId, sourceLaneId, targetLaneId);
     }
 
-    onCardDelete = (cardId, metadata, laneId)=>{
+    onCardDelete = (cardId,laneId)=>{
       //TODO delete callback to HC
-      console.log("onCardDelete: ", cardId, metadata , laneId);
+      console.log("onCardDelete: ", cardId,laneId);
+      this.props.deleteCard(cardId,laneId);
     };
 
     onCardClick = (cardId, metadata, laneId)=>{
