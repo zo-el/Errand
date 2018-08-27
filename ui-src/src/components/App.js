@@ -32,7 +32,7 @@ class App extends Component {
           //console.log("PROPS", this.props)
 
         },
-        500
+        50
       );
     }
 
