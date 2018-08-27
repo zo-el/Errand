@@ -2,22 +2,12 @@
 /*=============================================
 =            Action Exports
 =============================================*/
-<<<<<<< HEAD
-const GET_BOARD_STATE = "getBoardState";
-const ADD_CARD = "addCard";
-const MOVE_CARD = "moveCard";
-const DELETE_CARD = "deleteCard";
-const NEW_LANE = "newLane";
-const namespace = "boards";
-=======
-export const namespace = "boards";
-
 export const GET_BOARD_STATE = "getBoardState";
-export const ADD_CARD = "newCard";
-export const ADD_LANE = "newLane";
+export const ADD_CARD = "addCard";
 export const MOVE_CARD = "moveCard";
 export const DELETE_CARD = "deleteCard";
->>>>>>> master
+export const NEW_LANE = "newLane";
+export const namespace = "boards";
 
 /*=============================================
 =            Action Definitions

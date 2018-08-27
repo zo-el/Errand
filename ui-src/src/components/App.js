@@ -14,7 +14,6 @@ const handleDragStart = (cardId, laneId) => {
 
 
 class App extends Component {
-<<<<<<< HEAD
   constructor (props) {
     super(props);
     this.state = {
@@ -23,15 +22,6 @@ class App extends Component {
       eventBus: ""
     };
   }
-=======
-    constructor (props) {
-      super(props);
-      this.state = {
-        boardData: { lanes: [] },
-        eventBus: ""
-      };
-    }
->>>>>>> master
 
     initApp = () => {
       setInterval(

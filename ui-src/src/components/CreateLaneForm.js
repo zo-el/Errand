@@ -32,6 +32,7 @@ class CreateLaneForm extends React.Component {
     const { inDescription } = this;
     if (inDescription) {
       const description = inDescription.value
+      console.log("Lane Name: ",description)
 
     }
   }
