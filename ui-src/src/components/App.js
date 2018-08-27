@@ -104,7 +104,7 @@ class App extends Component {
             <div className="App">
                 <div className="App-header">
                 <img src="errand.png" height="42" width="42" />
-                    <h1>Errand</h1>
+                    <h1>Trollo</h1>
                 </div>
                 <div className="App-intro">
                     <Board
