@@ -2,12 +2,22 @@
 /*=============================================
 =            Action Exports
 =============================================*/
+<<<<<<< HEAD
 const GET_BOARD_STATE = "getBoardState";
 const ADD_CARD = "addCard";
 const MOVE_CARD = "moveCard";
 const DELETE_CARD = "deleteCard";
 const NEW_LANE = "newLane";
 const namespace = "boards";
+=======
+export const namespace = "boards";
+
+export const GET_BOARD_STATE = "getBoardState";
+export const ADD_CARD = "newCard";
+export const ADD_LANE = "newLane";
+export const MOVE_CARD = "moveCard";
+export const DELETE_CARD = "deleteCard";
+>>>>>>> master
 
 /*=============================================
 =            Action Definitions
@@ -38,39 +48,44 @@ export function newLane (lane_title, then) {
   }
 
 /*======== Card State Management =========*/
-export function addCard (card_info, then) {
-  console.log("card_info inside actions", card_info);
+export function addCard(card_info, lane_id) {
+  console.log("card_info inside actions", card_info, lane_id);
+  const data={
+    id: card_info.id,
+    title: card_info.title,
+    description: card_info.description,
+    lane_id: lane_id
+  };
   return {
-      type: ADD_CARD,
-      meta: {
-        isHc: true,
-        namespace: namespace,
-        data: card_info,
-        then
-      }
+    type: ADD_CARD,
+    meta: {
+      isHc: true,
+      namespace: namespace,
+      data: data
     }
   }
+}
 
 //card should change lanes id
-export function moveCard(lane) {
+export function moveCard(cardId, sourceLaneId, targetLaneId) {
   return {
     type: MOVE_CARD,
     meta: {
       isHc: true,
       namespace: namespace,
-      data: lane,
+      data: {cardId, sourceLaneId, targetLaneId},
     }
   }
 }
 
 //
-export function deleteCard(card_id) {
+export function deleteCard(card_id,lane_id) {
   return {
     type: DELETE_CARD,
     meta: {
       isHc: true,
       namespace: namespace,
-      data: card_id,
+      data: {card_id:card_id,lane_id:lane_id},
     }
   }
 }

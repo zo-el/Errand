@@ -16,7 +16,7 @@
     "request": "^2.88.0"
   },
   "devDependencies": {
-    "react-scripts": "0.9.5"
+    "react-scripts": "1.1.5"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,6 +1,30 @@
-import * as A from './actions';
+import * as actions from './actions';
 import { combineReducers } from 'redux';
 import data from './data';
+
+const errandApp = ( state = initialState, action) => {
+  // console.log("ACTIONS:: ",action)
+  const {meta, type , payload} = action;
+  switch (type) {
+    case actions.GET_BOARD_STATE:
+      const {board}=payload;
+      return Object.assign({...state},board);
+    case actions.ADD_CARD:
+      return {...state}
+      break;
+    case actions.MOVE_CARD:
+      return {...state}
+      break;
+    case actions.DELETE_CARD:
+      return {...state}
+      break;
+    default:
+      //console.log("default")
+    return state
+  }
+}
+
+
 
 const initialState =  {
   "lanes": [
@@ -44,27 +68,5 @@ const initialState =  {
   ]
 }
 
-const errandApp = ( state = initialState, action) => {
-  const {meta, type} = action;
-
-  switch (type) {
-    case A.GET_BOARD_STATE:
-     return {...state}
-      break;
-    case A.NEW_LANE:
-        return {...state}
-        break;
-    case A.ADD_CARD:
-      return {...state}
-      break;
-    case A.MOVE_CARD:
-      return {...state}
-      break;
-    case A.DELETE_CARD:
-      return {...state}
-      break;
-    default: return state
-  }
-}
 
 export default errandApp;

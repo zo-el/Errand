@@ -1,9 +1,9 @@
 # Errand
-Distrebuted Built on Trello on Holochain
+Distrebuted Trello Built on Holochain
 
 ## Demo:
 
-![alt tag](https://raw.githubusercontent.com/rcdexta/react-trello/master/react-trello.gif)
+![CreatePost](Errand.gif)
 
 ## Status:
 Build : In-Progress

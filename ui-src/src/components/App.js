@@ -5,7 +5,6 @@ import { Board } from 'react-trello'
 import { getBoardState, addCard, moveCard, deleteCard } from '../actions'
 import { connect } from 'react-redux'
 import { bindActionCreators } from "redux";
-const data = require('../data.js')
 
 const handleDragStart = (cardId, laneId) => {
     console.log('drag started')
@@ -13,14 +12,9 @@ const handleDragStart = (cardId, laneId) => {
     console.log(`laneId: ${laneId}`)
 }
 
-const handleDragEnd = (cardId, sourceLaneId, targetLaneId) => {
-    console.log('drag ended')
-    console.log(`cardId: ${cardId}`)
-    console.log(`sourceLaneId: ${sourceLaneId}`)
-    console.log(`targetLaneId: ${targetLaneId}`)
-}
 
 class App extends Component {
+<<<<<<< HEAD
   constructor (props) {
     super(props);
     this.state = {
@@ -29,16 +23,34 @@ class App extends Component {
       eventBus: ""
     };
   }
+=======
+    constructor (props) {
+      super(props);
+      this.state = {
+        boardData: { lanes: [] },
+        eventBus: ""
+      };
+    }
+>>>>>>> master
 
-componentDidMount() {
-    getBoardState();
-    const laneData = this.props;
-    this.setState({
-      boardData:  laneData  ,
-    })
-    //const cards = this.state.lanes.cards
-     console.log("PROPS", this.props)
-  }
+    initApp = () => {
+      setInterval(
+        () => {
+          this.props.getBoardState();
+          const laneData = this.props.state;
+          this.setState({
+            boardData:  laneData  ,
+          })
+          //console.log("PROPS", this.props)
+
+        },
+        50
+      );
+    }
+
+    componentDidMount() {
+      this.initApp();
+      }
 
     setEventBus = eventBus => {
       console.log("setEventBus")
@@ -54,12 +66,21 @@ componentDidMount() {
   	onCardAdd = (cards, laneId) => {
   		console.log(`onCardAdd( New card added to lane ${ laneId })`)
   		console.dir( cards )
-      addCard( cards );
+      this.props.addCard( cards,laneId );
   	};
 
-    onCardDelete = (cardId, metadata, laneId)=>{
+    handleDragEnd = (cardId, sourceLaneId, targetLaneId) => {
+        console.log('drag ended')
+        console.log(`cardId: ${cardId}`)
+        console.log(`sourceLaneId: ${sourceLaneId}`)
+        console.log(`targetLaneId: ${targetLaneId}`)
+        this.props.moveCard(cardId, sourceLaneId, targetLaneId);
+    }
+
+    onCardDelete = (cardId,laneId)=>{
       //TODO delete callback to HC
-      console.log("onCardDelete: ", cardId, metadata , laneId);
+      console.log("onCardDelete: ", cardId,laneId);
+      this.props.deleteCard(cardId,laneId);
     };
 
     onCardClick = (cardId, metadata, laneId)=>{
@@ -100,7 +121,7 @@ componentDidMount() {
                       collapsibleLanes={true}
                       editable={true}
                       // handleDragStart={this.handleDragStart}
-                      handleDragEnd={handleDragEnd}
+                      handleDragEnd={this.handleDragEnd}
                       onCardClick={this.onCardClick}
                       onCardAdd={this.onCardAdd}
                       onCardDelete={this.onCardDelete}
@@ -114,12 +135,18 @@ componentDidMount() {
 }
 const mapStateToProps = state => {
   return {
-    ...state
+    state
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ getBoardState, addCard, moveCard, deleteCard }, dispatch);
 }
+
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     getBoardState: () => dispatch(getBoardState()),
+//   }
+// }
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)
