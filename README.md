@@ -1,4 +1,4 @@
-# Trollo
+# Errand / Trollo
 Distributed Trello Built on Holochain
 
 ![GitHub last commit](https://img.shields.io/github/last-commit/HC-Interns/Trollo.svg)
