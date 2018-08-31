@@ -11,10 +11,10 @@ function newBoard({ title, label }) {
   commit("board", board);
 }
 
-function newLane({ id, title, lable }): Hash {
-  //const uuid: string = uuidGenerator();
-  const uuid: string = id;
-  const lane = { uuid, title, lable }
+function newLane({ title }): Hash {
+  const uuid: string = uuidGenerator();
+  //const uuid: string = id;
+  const lane = { uuid, title }
   const hash: string = commit("lane", lane);
   //TEMP :  add to pregenerated Board
   const BOARD_HASH = makeHash("board", { title: "First_Board", label: "" });
@@ -96,7 +96,12 @@ function getCards(lane_hash: Hash) {
 }
 
 function getLaneCard( lane_hash:Hash){
-  const card_list = getLinks(lane_hash, "card_tag", { Load: true ,StatusMask: HC.Status.Live })
+  let card_list={};
+  try{
+    card_list = getLinks(lane_hash, "card_tag", { Load: true ,StatusMask: HC.Status.Live })
+  }catch(e){
+    return {}
+  }
   return card_list;
 }
 
@@ -150,16 +155,16 @@ function genesis() {
 }
 
 function testGenesisFunction(){
-
-  newLane({id:"LANE_ID_1",title:"Lane_TITLE_1",lable:"Lane_Lable_1"});
-  newCard({"id":"Card_ID_11","title": "Card_Title_11","description": "Description of the First card 11","lane_id": "LANE_ID_1"})
-  newCard({"id":"Card_ID_12","title": "Card_Title_12","description": "Description of the First card 12","lane_id": "LANE_ID_1"})
-  newCard({"id":"Card_ID_13","title": "Card_Title_13","description": "Description of the First card 13","lane_id": "LANE_ID_1"})
-
-  newLane({id:"LANE_ID_2",title:"Lane_TITLE_2",lable:"Lane_Lable_2"});
-  newCard({"id":"Card_ID_21","title": "Card_Title_21","description": "Description of the First card 21","lane_id": "LANE_ID_2"})
-  newCard({"id":"Card_ID_22","title": "Card_Title_22","description": "Description of the First card 22","lane_id": "LANE_ID_2"})
-  newCard({"id":"Card_ID_23","title": "Card_Title_23","description": "Description of the First card 23","lane_id": "LANE_ID_2"})
+  //
+  // newLane({id:"LANE_ID_1",title:"Lane_TITLE_1",lable:"Lane_Lable_1"});
+  // newCard({"id":"Card_ID_11","title": "Card_Title_11","description": "Description of the First card 11","lane_id": "LANE_ID_1"})
+  // newCard({"id":"Card_ID_12","title": "Card_Title_12","description": "Description of the First card 12","lane_id": "LANE_ID_1"})
+  // newCard({"id":"Card_ID_13","title": "Card_Title_13","description": "Description of the First card 13","lane_id": "LANE_ID_1"})
+  //
+  // newLane({id:"LANE_ID_2",title:"Lane_TITLE_2",lable:"Lane_Lable_2"});
+  // newCard({"id":"Card_ID_21","title": "Card_Title_21","description": "Description of the First card 21","lane_id": "LANE_ID_2"})
+  // newCard({"id":"Card_ID_22","title": "Card_Title_22","description": "Description of the First card 22","lane_id": "LANE_ID_2"})
+  // newCard({"id":"Card_ID_23","title": "Card_Title_23","description": "Description of the First card 23","lane_id": "LANE_ID_2"})
 
 }
 

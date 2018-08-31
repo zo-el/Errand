@@ -30,3 +30,101 @@ h1 {
   display:inline;
 }
 img{  display:inline;}
+
+.lane-btn {
+  background: #6b96ce;
+  margin: 0 auto;
+  margin: 10px;
+  padding: 15px;
+  color: white;
+  border-radius: 25px;
+  display: inline-block;
+}
+
+.lane-btn-container {
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* ---------------- Modal CSS ------------------------ */
+
+#modal-container {
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  transform: scale(0);
+  z-index: 1;
+}
+
+.modal-container .register-modal {
+    background: #6b96ce;
+    border: 1px inset white;
+    width: 50%;
+    height: 50%;
+    position: fixed;
+    top: 20%;
+    left: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-container .error-message {
+  margin: 20px 5px;
+  color: rgba(247, 147, 29, 1);
+  font-weight: bold;
+}
+
+#modal-container .modal-background {
+  display: table-cell;
+  background: rgba(0, 0, 0, 0.8);
+  text-align: center;
+  vertical-align: middle;
+}
+
+#modal-container .modal-background .modal {
+  background: white;
+  padding: 50px;
+  display: inline-block;
+  border-radius: 3px;
+  font-weight: 300;
+  position: relative;
+}
+
+
+#modal-container .modal-background .modal p {
+  font-size: 18px;
+  line-height: 22px;
+}
+
+#modal-container .modal-background .modal .modal-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: 3px;
+}
+
+#modal-container .modal-background .modal .modal-svg rect {
+  stroke: #fff;
+  stroke-width: 2px;
+  stroke-dasharray: 778;
+  stroke-dashoffset: 778;
+}
+
+.interstitial-modal-overlay {
+  background: transparent;
+  position: fixed;
+  top: 20%;
+  left: 25%;
+  display: flex;
+}
+
+.interstitial-modal {
+  position: absolute;
+  top: 146px;
+  width: 400px;
+  height: 50%;
+}

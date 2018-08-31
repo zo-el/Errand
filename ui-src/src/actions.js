@@ -2,13 +2,12 @@
 /*=============================================
 =            Action Exports
 =============================================*/
-export const namespace = "boards";
-
 export const GET_BOARD_STATE = "getBoardState";
 export const ADD_CARD = "newCard";
-export const ADD_LANE = "newLane";
 export const MOVE_CARD = "moveCard";
 export const DELETE_CARD = "deleteCard";
+export const ADD_LANE = "newLane";
+export const namespace = "boards";
 
 /*=============================================
 =            Action Definitions
@@ -24,6 +23,21 @@ export function getBoardState() {
     }
   }
 }
+
+export function newLane (title) {
+  console.log("lane_title inside actions", title);
+  const data = {
+    title
+  }
+  return {
+      type: ADD_LANE,
+      meta: {
+        isHc: true,
+        namespace: namespace,
+        data: data
+      }
+    }
+  }
 
 /*======== Card State Management =========*/
 export function addCard(card_info, lane_id) {

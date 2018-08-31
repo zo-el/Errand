@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import './App.css'
-import {Board} from 'react-trello'
+import CreateLaneForm from "./CreateLaneForm"
+import { Board } from 'react-trello'
 import { getBoardState, addCard, moveCard, deleteCard } from '../actions'
 import { connect } from 'react-redux'
 import { bindActionCreators } from "redux";
@@ -13,13 +14,14 @@ const handleDragStart = (cardId, laneId) => {
 
 
 class App extends Component {
-    constructor (props) {
-      super(props);
-      this.state = {
-        boardData: { lanes: [] },
-        eventBus: ""
-      };
-    }
+  constructor (props) {
+    super(props);
+    this.state = {
+      boardData: { lanes: [] },
+      showModal: false,
+      eventBus: ""
+    };
+  }
 
     initApp = () => {
       setInterval(
@@ -76,37 +78,30 @@ class App extends Component {
       console.log("onCardClick: ",cardId, metadata , laneId);
     };
 
-    // completeCard = () => {
-    //     this.state.eventBus.publish({
-    //         type: 'ADD_CARD',
-    //         laneId: 'COMPLETED',
-    //         card: {id: 'Milk', title: 'Buy Milk', label: '15 mins', description: 'Use Headspace app'}
-    //     })
-    //     this.state.eventBus.publish({type: 'REMOVE_CARD', laneId: 'PLANNED', cardId: 'Milk'})
-    // };
-    //
-    // addCard = () => {
-    //     this.state.eventBus.publish({
-    //         type: 'ADD_CARD',
-    //         laneId: 'BLOCKED',
-    //         card: {id: 'Ec2Error', title: 'EC2 Instance Down', label: '30 mins', description: 'Main EC2 instance down'}
-    //     })
-    // };
-
-    // componentWillMount(){
-    //   // fetchJSON('/fn/boards/getBoard').then(() =>{
-    //   //
-    //   // });
-    // }
+    createLane = () => {
+      this.setState({showModal: !this.state.showModal});
+    }
 
     render() {
-        return (
+          const modalDiv = (
+            <div className="interstitial-modal-overlay">
+              <div className="interstitial-modal">
+                <div className="modal-container register-modal">
+                  <div className="modal">
+                    <CreateLaneForm onCreate={this.createLane}/>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )
+          return (
             <div className="App">
                 <div className="App-header">
                 <img src="errand.png" height="42" width="42" />
                     <h1>Trollo</h1>
                 </div>
                 <div className="App-intro">
+                  <div className="lane-btn-container"><button className="lane-btn" onClick={this.createLane}>Add Lane</button></div>
                     <Board
                       data={this.state.boardData}
                       eventBusHandle={this.setEventBus}
@@ -123,6 +118,7 @@ class App extends Component {
                       onDataChange={this.onDataChange}
                       />
                 </div>
+                { this.state.showModal ? modalDiv : null }
             </div>
         )
     }
