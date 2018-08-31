@@ -3,10 +3,10 @@
 =            Action Exports
 =============================================*/
 export const GET_BOARD_STATE = "getBoardState";
-export const ADD_CARD = "addCard";
+export const ADD_CARD = "newCard";
 export const MOVE_CARD = "moveCard";
 export const DELETE_CARD = "deleteCard";
-export const NEW_LANE = "newLane";
+export const ADD_LANE = "newLane";
 export const namespace = "boards";
 
 /*=============================================
@@ -24,15 +24,17 @@ export function getBoardState() {
   }
 }
 
-export function newLane (lane_title, then) {
-  console.log("lane_title inside actions", lane_title);
+export function newLane (title) {
+  console.log("lane_title inside actions", title);
+  const data = {
+    title
+  }
   return {
-      type: NEW_LANE,
+      type: ADD_LANE,
       meta: {
         isHc: true,
         namespace: namespace,
-        data: lane_title,
-        then
+        data: data
       }
     }
   }

@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React, {Component} from 'react';
 import './CreateLaneForm.css';
-import { getBoardState, newLane } from '../actions'
+import { newLane } from '../actions'
 import { connect } from 'react-redux'
 import { bindActionCreators } from "redux";
 
@@ -31,9 +31,9 @@ class CreateLaneForm extends React.Component {
   handleCreate = () => {
     const { inDescription } = this;
     if (inDescription) {
-      const description = inDescription.value
-      console.log("Lane Name: ",description)
-
+      const title = inDescription.value
+      console.log("Lane Name: ",this.props)
+      this.props.newLane(title);
     }
   }
 
@@ -48,5 +48,14 @@ class CreateLaneForm extends React.Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    state
+  }
+}
 
-export default connect()(CreateLaneForm);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ newLane }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateLaneForm);
